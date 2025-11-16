@@ -4,7 +4,9 @@ Custom JavaScript Discord Bot built on DiscordJS version 12, written in JavaScri
 
 An accompanying website was also created for the bot: https://management-bot.tk/, but has since been shut down due to Heroku moving away from a free to use platform and the Freenom subscription for the domain running out.
 
-The bot can be added using the following link: https://discordapp.com/oauth2/authorize?client_id=752964112354639882&scope=bot
+The bot can be added using the following link: https://discordapp.com/oauth2/authorize?client_id=752964112354639882&scope=bot.
+Unfortunately does not work anymore as Discord has changed their Developer Portal with the original Bot being removed in late 2024.
+However, this Repository can be cloned and hosted on an another platform for free by other users.
 
 All commands can be found here:
 
