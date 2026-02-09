@@ -14,7 +14,7 @@ module.exports = {
             .get("https://nekos.life/api/v2/img/pat");
 
         if (!args[0]) {
-            const ghembed = new Discord.MessageEmbed()
+            const ghembed = new Discord.EmbedBuilder()
                 .setColor(0xa88e79)
                 .setDescription(`**<@${message.author.id}>** wants to get patted`)
                 .setImage(body.url)
@@ -24,7 +24,7 @@ module.exports = {
             return;
         }
         if (!message.mentions.members.first().user.username === message.mentions.has(message.author)) {
-            const hembed = new Discord.MessageEmbed()
+            const hembed = new Discord.EmbedBuilder()
                 .setColor(0xa88e79)
                 .setDescription(`**<@${message.author.id}>** pats <@${rUser.user.id}>`)
                 .setImage(body.url)
@@ -33,7 +33,7 @@ module.exports = {
             })
             return;
         }
-        const ghembed = new Discord.MessageEmbed()
+        const ghembed = new Discord.EmbedBuilder()
             .setColor(0xa88e79)
             .setDescription(`**<@${message.author.id}>** pats himself`)
             .setImage(body.url)

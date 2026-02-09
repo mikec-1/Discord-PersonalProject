@@ -20,10 +20,10 @@ module.exports = {
         let avatar = message.author.displayAvatarURL({
             format: "png"
         });
-        const embed = new Discord.MessageEmbed()
+        const embed = new Discord.EmbedBuilder()
             .setColor('#000000')
             .setDescription(`${message.author} kissed ${user}`)
             .setImage(rand)
-        await message.channel.send(embed);
+        await message.channel.send({ embeds: [embed] });
     }
 }

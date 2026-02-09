@@ -4,7 +4,7 @@ module.exports = {
     name: 'setavatar',
     description: 'Set bot avatar',
     run: async (client, message, args) => {
-        if (message.author.id !== "673485740679757835") {
+        if (!client.config.owners.includes(message.author.id)) {
             return message.channel.send(`This is a Owner only command`);
         }
         if (!args || args.length < 1) {

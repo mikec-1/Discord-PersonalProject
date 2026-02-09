@@ -1,23 +1,28 @@
 const ms = require('ms');
+const { PermissionFlagsBits } = require('discord.js');
 
 module.exports = {
     name: "giveaway",
     description: "Starts a giveaway",
     usage: "$giveaway <channel> <duration> <# of winners> <prize>",
     run: async (client, message, args) => {
-        if (!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send('You are not allowed to start giveaways');
+        if (!message.member.permissions.has(PermissionFlagsBits.ManageMessages)) {
+            return message.channel.send('You are not allowed to start giveaways');
+        }
 
-        let channel = message.mentions.channels.first();
+        // Parse channel from mention or ID
+        let channelId = args[0]?.replace(/[<#>]/g, '');
+        let channel = message.guild.channels.cache.get(channelId);
 
-        if (!channel) return message.channel.send('Please provide a channel!');
+        if (!channel) return message.channel.send('Please provide a valid channel!');
 
         let giveawayDuration = args[1];
 
         if (!giveawayDuration || isNaN(ms(giveawayDuration))) return message.channel.send('Pleae provide a valid duration!');
 
-        let giveawayWinners = args[2];
+        let giveawayWinners = parseInt(args[2]);
 
-        if (isNaN(giveawayWinners) || (parseInt(giveawayWinners) <= 0)) return message.channel.send('Please provide a valid number of winners!');
+        if (isNaN(giveawayWinners) || giveawayWinners <= 0) return message.channel.send('Please provide a valid number of winners!');
 
         let giveawayPrize = args.slice(3).join(" ");
 

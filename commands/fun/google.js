@@ -15,15 +15,15 @@ module.exports = {
         href = await search(query);
         if (!href) return message.channel.send("Unknown search.");
 
-        const embed = new Discord.MessageEmbed()
+        const embed = new Discord.EmbedBuilder()
             .setTitle(href.title)
             .setDescription(href.snippet)
             .setImage(href.pagemap ? href.pagemap.cse_thumbnail[0].src : null) // Sometimes, the thumbnail might be unavailable in variant site. Returning it to null.
             .setURL(href.link)
             .setColor(0x7289DA)
-            .setFooter("All information is provided by Google")
+            .setFooter({ text: "All information is provided by Google" })
 
-        return message.channel.send(embed);
+        return message.channel.send({ embeds: [embed] });
 
         async function search(query) {
 

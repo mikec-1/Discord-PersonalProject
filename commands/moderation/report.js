@@ -1,4 +1,4 @@
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 module.exports = {
   name: "report",
   category: "moderation",
@@ -24,7 +24,7 @@ module.exports = {
         return message.channel.send(
           `There is no channel in this guild called \`reports\``
         );
-      let Embed = new MessageEmbed()
+      let Embed = new EmbedBuilder()
         .setTitle(`New report!`)
         .setDescription(
           `${message.author.tag}` + " has reported the user " + `${User.tag}!`
@@ -43,7 +43,7 @@ module.exports = {
             inline: true,
           }
         );
-      Channel.send(Embed);
+      Channel.send({ embeds: [Embed] });
       message.channel.send("Thank you, the user has been reported.")
     }
   },

@@ -2,7 +2,7 @@ const {
     get
 } = require("request-promise-native");
 const {
-    MessageEmbed
+    EmbedBuilder
 } = require("discord.js")
 
 module.exports = {
@@ -29,17 +29,17 @@ module.exports = {
         message.channel.send("Fetching The Info").then(msg => {
             get(option).then(body => {
                 try {
-                    let embed = new MessageEmbed()
+                    let embed = new EmbedBuilder()
                         .setTitle(body.data[0].attributes.titles.en)
                         .setColor("RED")
                         .setDescription(body.data[0].attributes.synopsis)
                         .setThumbnail(body.data[0].attributes.posterImage.original)
-                        .addField("Ratings", body.data[0].attributes.averageRating)
-                        .addField("TOTAL EPISODES", body.data[0].attributes.episodeCount)
+                        .addFields({ name: "Ratings", value:  body.data[0].attributes.averageRating })
+                        .addFields({ name: "TOTAL EPISODES", value:  body.data[0].attributes.episodeCount })
                         .setImage(body.data[0].attributes.coverImage.large)
 
 
-                    message.channel.send(embed)
+                    message.channel.send({ embeds: [embed] })
                     msg.delete();
 
                 } catch (err) {

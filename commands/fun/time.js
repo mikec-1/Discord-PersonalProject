@@ -27,7 +27,7 @@ module.exports = {
         const info = body("section#time_zone ul li").next().next().next().next().first().text();
         //console.log(`• Error: ${error}\n• Locale: ${locale}\n• Time: ${time}\n• Date: ${date}\n• Title: ${title}\n• Coordination: ${latlong}\n• Population: ${population}\n• Map: ${map}\n• Information: ${info}`)
 
-        const embed = new Discord.MessageEmbed()
+        const embed = new Discord.EmbedBuilder()
             .setTitle(moment(time, 'HH:mm:ss').format('h:mm:ss A'))
             .setURL(`https://time.is/${encodeURI(location)}`)
             .setDescription(`**${locale ? locale: "\u200b"}**
@@ -38,6 +38,6 @@ module.exports = {
                 //{ name: '\u200b', value: info ? info: "\u200b" }
             ])
 
-        return message.channel.send(embed);
+        return message.channel.send({ embeds: [embed] });
     }
 }

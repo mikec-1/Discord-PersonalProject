@@ -1,43 +1,38 @@
-const Discord = require("discord.js");
-const {
-    MessageEmbed
-} = require('discord.js')
-const fetch = require('node-fetch');
+const Discord = require('discord.js');
+const snek = require('node-superfetch');
+const moment = require('moment');
+require('moment-duration-format');
 
 module.exports = {
     name: "npm",
-    description: "Get package information from NPM",
-    run: async (bot, message, args) => {
-
-        if (!args[0]) message.channel.send('You must provide a package name to search for.');
-        if (args[0]) {
-            const res = await (await fetch(`https://registry.npmjs.org/${args[0]}`)).json();
-            if (!res) {
-                throw `Cannot find '${args[0]}' package.`;
-            }
-            const body = res.versions[res['dist-tags'].latest];
-            const embed = new MessageEmbed()
-                .setTitle(`npm | ${body.name}`)
-                .setURL(`https://www.npmjs.com/package/${body.name}`)
-                .setDescription(body.description)
+    category: "fun",
+    description: "Gets information on an npm package",
+    run: async (client, message, args) => {
+        if (args.length === 0) return message.reply('You must supply a package name!');
+        const pkg = args[0];
+        try {
+            const {
+                body
+            } = await snek.get(`https://registry.npmjs.com/${pkg}`);
+            const embed = new Discord.EmbedBuilder()
+                .setColor(0xCB3837)
+                .setAuthor({ name: 'NPM', iconURL: 'https://i.imgur.com/ErKfSXY.png', url: 'https://www.npmjs.com/' })
+                .setTitle(body.name)
+                .setURL(`https://www.npmjs.com/package/${pkg}`)
+                .setDescription(body.description || 'No description.')
                 .setThumbnail(`https://cdn.auth0.com/blog/npm-package-development/logo.png`)
-                .addField('Version', body.version, true)
-                .addField('License', body.license, true)
-                .addField('Repository', body.repository ? `[Click Here](${body.repository.url.split("+")[1]})` : "None", true)
-                .addField('Dependencies', body.dependencies ? Object.keys(body.dependencies).join(', ') : 'None', true)
-                .addField('Keywords', body.keywords ? body.keywords.join(', ') : 'None')
-                .addField('Maintainers', body.maintainers.map(maintainer => maintainer.name).join(', '))
-                .setColor('RED')
-                .setFooter(
-                    `Requested by ${message.author.tag}`,
-                    message.author.displayAvatarURL({
-                        dynamic: true
-                    })
-                )
-                .setTimestamp()
-            message.channel.send(embed);
+                .addFields({ name: 'Version', value: body.version, inline: true })
+                .addFields({ name: 'License', value: body.license || 'None', inline: true })
+                .addFields({ name: 'Repository', value: body.repository ? `[Click Here](${body.repository.url.split("+")[1]})` : "None", inline: true })
+                .addFields({ name: 'Dependencies', value: body.dependencies ? Object.keys(body.dependencies).join(', ') : 'None', inline: true })
+                .addFields({ name: 'Keywords', value: body.keywords ? body.keywords.join(', ') : 'None', inline: true })
+                .addFields({ name: 'Maintainers', value: body.maintainers ? body.maintainers.map(m => m.name).join(', ') : 'None', inline: true })
+                .addFields({ name: 'Last Updated', value: moment(body.time.modified).format("MM/DD/YYYY h:mm A"), inline: true });
 
+            message.channel.send({ embeds: [embed] });
+        } catch (e) {
+            if (e.status === 404) return message.reply('Could not find that package.');
+            return message.reply('Could not find that package.');
         }
     }
-
-};
+}

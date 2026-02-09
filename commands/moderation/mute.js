@@ -1,5 +1,5 @@
 const {
-    MessageEmbed
+    EmbedBuilder
 } = require('discord.js');
 const ms = require('ms')
 
@@ -12,14 +12,14 @@ module.exports = {
             return message.channel.send("You do not have permission to mute anyone");
         }
 
-        if (!message.guild.me.hasPermission("MANAGE_ROLES")) {
+        if (!message.guild.members.me.hasPermission("MANAGE_ROLES")) {
             return message.channel.send("I do not have permission to manage roles.");
         }
 
         if (!message.member.hasPermission("ADMINISTRATOR")) {
             return message.channel.send(`**${message.author.username}**, You do not have enough permission to use this command`)
         }
-        var person = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[1]));
+        var person = message.guild.members.member(message.mentions.users.first() || message.guild.members.get(args[1]));
         if (!person) return message.reply("I couldn't find " + person)
 
         let role = message.guild.roles.cache.find(role => role.name === "Muted");

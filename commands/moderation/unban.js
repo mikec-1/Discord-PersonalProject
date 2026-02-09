@@ -1,5 +1,5 @@
 const {
-    MessageEmbed
+    EmbedBuilder
 } = require("discord.js")
 
 module.exports = {
@@ -17,7 +17,7 @@ module.exports = {
         let reason = args.slice(1).join(" ")
         if (!reason) reason = "No reason"
 
-        if (!message.guild.me.hasPermission(["BAN_MEMBERS", "ADMINISTRATOR"])) return message.channel.send("I dont have permission to perform this command!") |
+        if (!message.guild.members.me.hasPermission(["BAN_MEMBERS", "ADMINISTRATOR"])) return message.channel.send("I dont have permission to perform this command!") |
             message.delete()
         try {
             message.guild.members.unban(bannedMember, reason)

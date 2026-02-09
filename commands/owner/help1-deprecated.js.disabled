@@ -1,0 +1,65 @@
+const Discord = require("discord.js")
+const {
+    Command
+} = require('discord.js-commando');
+
+
+module.exports = {
+    name: 'help1-deprecated',
+    category: "info",
+    description: "Get commands help",
+    run: async (client, message, args) => {
+
+        if (!args[0]) {
+            const embed = new Discord.EmbedBuilder()
+            embed.setThumbnail(message.client.user.avatarURL());
+            embed.setTitle("Management Bot Help")
+            embed.setDescription("All commands for Management Bot")
+            embed.addFields({ name: "❯ Owner", value: "`eval`, `blacklist`, `unblacklist`, `status`" })
+            embed.addFields({ name: "❯ Mod", value: "`ban`,`clear`,`kick`, `leave`, `mute`, `warn`, `warnings`, `reset warns`, `set welcome`, `set leave`, `unmute`" })
+            embed.addFields({ name: "❯ Fun", value: "`anime`, `corona`, `hug`, `imdb`, `instagram`, `kiss`, `rank`, `meow`, `pat`, `ping`, `poke`, `pokemon`, `scrap`, `send`, `nickname`, `snipe`, `spotify`, `weather`, `help`" })
+            embed.addFields({ name: "Giveaway", value: "`giveaway`, `reroll`" })
+            embed.setFooter('Made by FredTheBread\nUsage: $giveaway <channel> <winners> <time> <prize>', `${message.client.user.avatarURL()}`);
+            embed.setColor("#00ff00")
+
+            message.channel.send(embed);
+        }
+        if (args[0] === 'Mod') {
+            const embed3 = new Discord.EmbedBuilder()
+            embed3.setTitle("Mod commands for Mnagement Bot")
+            embed3.setDescription("You need server permissions to use these")
+            embed3.addFields({ name: "`ban`", value: "Bans a specified person" })
+            embed3.addFields({ name: "`clear`", value: "Clears a certain number of messages" })
+            embed3.addFields({ name: "`kick`", value: "Kicks a specified person" })
+            embed3.addFields({ name: "`leave`", value: "The bot leaves the current server" })
+        }
+        if (args[0] === 'Owner') {
+            const embed2 = new Discord.EmbedBuilder()
+            embed2.setTitle("Owner commands for Management Bot")
+            embed2.setDescription("You need to be a bot owner for these")
+            embed2.addFields({ name: "`eval`", value: "Evaluate a piece of code" })
+            embed2.addFields({ name: "`blacklist`", value: "Blacklist a user from using the bot" })
+            embed2.addFields({ name: "`unblacklist`", value: "Unblacklist a user from the bot" })
+            embed2.addFields({ name: "`status`", value: "Change the Status of the bot" })
+            embed2.addFields({ name: "`leave`", value: "Makes the bot leave the server" })
+            embed2.setFooter('DM FredTheBread#6932 if you would like to be an owner of the bot', `${message.client.user.avatarURL()}`);
+            embed2.setColor("#00ff00")
+            message.channel.send(embed2);
+        }
+
+        if (args[0] === 'owner') {
+            const embed2 = new Discord.EmbedBuilder()
+            embed2.setTitle("Owner commands for Management Bot")
+            embed2.setDescription("You need to be a bot owner for these")
+            embed2.addFields({ name: "eval", value: "Evaluate a piece of code" })
+            embed2.addFields({ name: "blacklist", value: "Blacklist a user from using the bot" })
+            embed2.addFields({ name: "unblacklist", value: "Unblacklist a user from the bot" })
+            embed2.addFields({ name: "status", value: "Change the Status of the bot" })
+            embed2.addFields({ name: "`leave`", value: "Makes the bot leave the server" })
+            embed2.setFooter('DM FredTheBread#6932 if you would like to be an owner of the bot\nUsage: $eval command, $status *something*', `${message.client.user.avatarURL()}`);
+            embed2.setColor("#00ff00")
+            message.channel.send(embed2);
+        }
+
+    }
+};

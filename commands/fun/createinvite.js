@@ -9,9 +9,9 @@ module.exports = {
             maxAge: 0,
             maxUses: 0
         }).catch(console.error);
-        const embed = new Discord.MessageEmbed()
+        const embed = new Discord.EmbedBuilder()
             .setTitle(message.author.username + "'s invite")
             .setDescription("discord.gg/" + invite)
-        message.channel.send(embed);
+        message.channel.send({ embeds: [embed] });
     }
 }

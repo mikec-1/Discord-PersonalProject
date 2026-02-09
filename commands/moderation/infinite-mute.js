@@ -1,6 +1,4 @@
-const Discord = require('discord.js');
-const client = new Discord.Client();
-client.mute = new Map();
+
 let ms = require('ms');
 
 
@@ -9,11 +7,12 @@ module.exports = {
   category: "moderation",
   description: "Mute someone",
   run: async (client, message, args) => {
-    if (!message.member.hasPermission("MANAGE_MESSAGES") || !message.member.hasPermission("MUTE_MEMBERS") || !message.member.hasPermission("ADMINISTRATOR")) {
+    if (!message.member.permissions.has("MANAGE_MESSAGES") || !message.member.permissions.has("MUTE_MEMBERS") || !message.member.permissions.has("ADMINISTRATOR")) {
       return message.channel.send("You don't have any permissions to do this: Manage Messages/Mute Members/Admin");
     }
+    if (!client.mute) client.mute = new Map();
 
-    let user = message.guild.member(message.mentions.users.first()) || message.guild.members.cache.get(args[0]);
+    let user = message.guild.members.member(message.mentions.users.first()) || message.guild.members.cache.get(args[0]);
     if (!user) return message.channel.send("You need to mention the user.");
     if (user.id === client.user.id) return message.channel.send("You can't mute me.");
     if (user.id === message.author.id) return message.channel.send("You can't mute yourself.");
@@ -39,7 +38,7 @@ module.exports = {
       }, ms(time))
 
       client.mute.set(user.user.id, timer);
-      message.channel.send(`${user.user.tag} is now muted for **${ms(ms(time), {long: true})}**`);
+      message.channel.send(`${user.user.tag} is now muted for **${ms(ms(time), { long: true })}**`);
     }
   }
 }

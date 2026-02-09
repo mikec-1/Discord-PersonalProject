@@ -22,7 +22,7 @@ module.exports = {
         let timeout = 86400000;
         let reward = 500;
     
-        let embed = new Discord.MessageEmbed();
+        let embed = new Discord.EmbedBuilder();
         embed.setTitle("Daily Reward");
     
         Data.findOne({
@@ -45,8 +45,8 @@ module.exports = {
     
                     embed.setColor("ff0000");
                     embed.setDescription(`**You already collected your daily reward!**`);
-                    embed.addField(`Collect again in`, `**${time.hours}h ${time.minutes}m ${time.seconds}s**`);
-                    return message.channel.send(embed);
+                    embed.addFields({ name: `Collect again in`, value: `**${time.hours}h ${time.minutes}m ${time.seconds}s**` });
+                    return message.channel.send({ embeds: [embed] });
                 } else {
                     data.money += reward;
                     data.save().catch(err => console.log(err));
@@ -54,8 +54,8 @@ module.exports = {
     
     
                     embed.setDescription(`You have collected your daily reward of ${reward}. Current balance is ${data.money}.`);
-                    embed.setColor("RANDOM");
-                    return message.channel.send(embed);
+                    embed.setColor(Math.floor(Math.random() * 16777215));
+                    return message.channel.send({ embeds: [embed] });
                 }
                 //return message.channel.send(`${message.author.username} has $${data.money}.`);
             }

@@ -1,6 +1,6 @@
 const canvacord = require("canvacord");
 const {
-    MessageAttachment
+    AttachmentBuilder
 } = require("discord.js");
 
 module.exports = {
@@ -11,9 +11,10 @@ module.exports = {
         let user = message.mentions.users.first() || client.users.cache.get(args[0]) || message.author;
         let triggered = await canvacord.Canvas.trigger(user.displayAvatarURL({
             format: "png",
-            dynamic: false
+            dynamic: false,
+            extension: "png"
         }));
-        let attachment = new MessageAttachment(triggered, "triggered.gif");
-        return message.channel.send(attachment);
+        let attachment = new AttachmentBuilder(triggered, { name: "triggered.gif" });
+        return message.channel.send({ files: [attachment] });
     }
 }

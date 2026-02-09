@@ -1,5 +1,5 @@
 const axios = require('axios');
-const { MessageEmbed } = require('discord.js');
+const { EmbedBuilder } = require('discord.js');
 
 module.exports = {
     name: "dog",
@@ -23,12 +23,12 @@ module.exports = {
             return message.channel.send(`An error occured, please try again!`)
         }
 
-        const embed = new MessageEmbed()
+        const embed = new EmbedBuilder()
             .setTitle(`Random Dog Image and Fact`)
             .setColor(`#f3f3f3`)
             .setDescription(fact.fact)
             .setImage(image.link)
 
-        await message.channel.send(embed)
+        await message.channel.send({ embeds: [embed] })
     }
 }

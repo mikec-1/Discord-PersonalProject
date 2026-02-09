@@ -1,4 +1,4 @@
-const { MessageEmbed } = require('discord.js')
+const { EmbedBuilder } = require('discord.js')
 module.exports = {
     name: "nuke",
     description: "Nukes a given channel",
@@ -12,7 +12,7 @@ module.exports = {
         }
         let newchannel = await message.channel.clone()
         await message.channel.delete()
-        let embed = new MessageEmbed()
+        let embed = new EmbedBuilder()
         .setTitle("Channel Nuked")
         .setDescription(reason)
         .setImage('https://media0.giphy.com/media/oe33xf3B50fsc/200.gif')

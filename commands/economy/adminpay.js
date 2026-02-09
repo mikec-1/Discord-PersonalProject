@@ -17,7 +17,7 @@ module.exports = {
     aliases: ["ap"],
     description: "Gives everyone money",
     run: async (client, message, args) => {
-        if (message.author.id != "673485740679757835") return message.reply("you cannot use this command!");
+        if (!client.config.owners.includes(message.author.id)) return message.reply("you cannot use this command!");
         let user = message.mentions.users.first() || client.users.cache.get(args[0]);
         if (!user) return message.reply("you need to specify who you want to pay!");
         if (args[1] != Math.floor(args[1])) return message.reply("please enter only whole numbers!");

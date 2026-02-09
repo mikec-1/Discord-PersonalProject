@@ -20,18 +20,18 @@ module.exports = {
         }, function (err, result) {
             try {
 
-                let embed = new discord.MessageEmbed()
+                let embed = new discord.EmbedBuilder()
                     .setTitle(`Weather - ${result[0].location.name}`)
                     .setColor("#ff2050")
                     .setDescription("Temperature units can may be differ some time")
-                    .addField("Temperature", `${result[0].current.temperature} Celcius`, true)
-                    .addField("Sky", result[0].current.skytext, true)
-                    .addField("Humidity", result[0].current.humidity, true)
-                    .addField("Wind Speed", result[0].current.windspeed, true) //What about image
-                    .addField("Observation Time", result[0].current.observationtime, true)
-                    .addField("Wind Display", result[0].current.winddisplay, true)
+                    .addFields({ name: "Temperature", value:  `${result[0].current.temperature} Celcius`, inline: true })
+                    .addFields({ name: "Sky", value:  result[0].current.skytext, inline: true })
+                    .addFields({ name: "Humidity", value:  result[0].current.humidity, inline: true })
+                    .addFields({ name: "Wind Speed", value:  result[0].current.windspeed, inline: true }) //What about image
+                    .addFields({ name: "Observation Time", value:  result[0].current.observationtime, inline: true })
+                    .addFields({ name: "Wind Display", value:  result[0].current.winddisplay, inline: true })
                     .setThumbnail(result[0].current.imageUrl);
-                message.channel.send(embed)
+                message.channel.send({ embeds: [embed] })
             } catch (err) {
                 return message.channel.send("Unable To Get the data of Given location")
             }

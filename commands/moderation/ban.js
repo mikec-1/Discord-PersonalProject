@@ -13,7 +13,7 @@ module.exports = {
             return message.channel.send(`**${message.author.username}**, You do not have enough permission to use this command`);
         }
 
-        if (!message.guild.me.hasPermission("BAN_MEMBERS")) {
+        if (!message.guild.members.me.hasPermission("BAN_MEMBERS")) {
             return message.channel.send(`**${message.author.username}**, I do not have enough permission to use this command`);
         }
         let target = message.mentions.members.first();
@@ -28,12 +28,12 @@ module.exports = {
             return message.channel.send(`**${message.author.username}**, you can\'t kick yourself`)
         }
         if (!reason) reason = "No reason provided"
-        let embed = new Discord.MessageEmbed()
+        let embed = new Discord.EmbedBuilder()
             .setTitle(`Ban Hammer`)
             .setDescription(`Banned ${target} (${target.id})`)
             .setColor("#ff2050")
             .setFooter(`Banned by ${message.author.username} for: ${reason}`)
-        message.channel.send(embed)
+        message.channel.send({ embeds: [embed] })
 
         target.ban(args[1]);
     }

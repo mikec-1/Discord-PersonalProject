@@ -5,7 +5,7 @@ module.exports = {
     name: "slap",
     description: "slap someone in your guild",
     run: async (bot, message, args) => {
-        if(!args[0]) {
+        if (!args[0]) {
             return message.channel.send("You need to slap someone")
         }
         let user1 = message.author;
@@ -19,7 +19,7 @@ module.exports = {
             format: "png"
         });
         let image = await canvacord.Canvas.slap(user1Avatar, user2Avatar);
-        let attachment = new Discord.MessageAttachment(image, "slap.png");
-        return message.channel.send(attachment);
+        let attachment = new Discord.AttachmentBuilder(image, { name: "slap.png" });
+        return message.channel.send({ files: [attachment] });
     },
 }

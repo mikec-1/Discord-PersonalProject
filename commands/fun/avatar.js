@@ -27,16 +27,16 @@ module.exports = {
     }
 
     function getuseravatar(user) {
-      var embed = new Discord.MessageEmbed()
+      var embed = new Discord.EmbedBuilder()
         .setColor('#ffa500')
-        .addField('Link as', `[png](${user.displayAvatarURL({ format: 'png', dynamic: true, size: 4096})}) | [jpg](${user.displayAvatarURL({ format: 'jpg', dynamic: true, size: 4096})}) | [webp](${user.displayAvatarURL({ format: 'webp', dynamic: true, size: 4096})})`)
+        .addFields({ name: 'Link as', value: `[png](${user.displayAvatarURL({ format: 'png', dynamic: true, size: 4096})}) | [jpg](${user.displayAvatarURL({ format: 'jpg', dynamic: true, size: 4096})}) | [webp](${user.displayAvatarURL({ format: 'webp', dynamic: true, size: 4096})})` })
         .setImage(user.displayAvatarURL({
           dynamic: true,
           size: 4096
         }))
         .setTitle(user.tag + `'s Profile Picture`)
 
-      message.channel.send(embed)
+      message.channel.send({ embeds: [embed] })
     }
   }
 }

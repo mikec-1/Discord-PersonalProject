@@ -10,7 +10,7 @@ module.exports = {
             return message.channel.send(`**${message.author.username}**, You do not have enough permission to use this command`)
         }
 
-        if (!message.guild.me.hasPermission("KICK_MEMBERS")) {
+        if (!message.guild.members.me.hasPermission("KICK_MEMBERS")) {
             return message.channel.send(`**${message.author.username}**, I do not have enough permission to use this command`)
         }
 
@@ -31,13 +31,13 @@ module.exports = {
         if (!reason) {
             reason = "No reason provided.";
         }
-        let embed = new discord.MessageEmbed()
+        let embed = new discord.EmbedBuilder()
         .setTitle("Action: Kick")
         .setDescription(`Kicked ${target} (${target.id})`)
         .setColor("#ff2050")
         .setFooter(`Kicked by ${message.author.username} for '` + reason + `'`);
         
-        message.channel.send(embed)
+        message.channel.send({ embeds: [embed] })
         
         target.kick(args[1]);
     }

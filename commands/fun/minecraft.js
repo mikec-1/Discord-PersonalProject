@@ -10,7 +10,7 @@ module.exports = {
         let argsCaps = (args[0])
         if (args[1] == "full") {
             var api = `https://minotar.net/armor/body/${args[0]}/500.png`
-            const fullfront = new Discord.MessageEmbed()
+            const fullfront = new Discord.EmbedBuilder()
                 .setTitle(`${argsCaps}'s Fullfrontal Skin`)
                 .setImage(`${api}`)
                 .setFooter(`Management`)
@@ -20,7 +20,7 @@ module.exports = {
         if (args[1] == "armor") {
             var api = `https://minotar.net/armor/body/${args[0]}/100.png`
 
-            const armor = new Discord.MessageEmbed()
+            const armor = new Discord.EmbedBuilder()
                 .setTitle(`${argsCaps}'s Armored Skin`)
                 .setImage(`${api}`)
                 .setFooter(`Management`)
@@ -29,7 +29,7 @@ module.exports = {
         if (args[1] == "avatar") {
             var api = `https://minotar.net/avatar/${args[0]}`
 
-            const avatar = new Discord.MessageEmbed()
+            const avatar = new Discord.EmbedBuilder()
                 .setTitle(`${argsCaps}'s Avatar`)
                 .setImage(`${api}`)
                 .setFooter(`Management`)
@@ -38,7 +38,7 @@ module.exports = {
         if (args[1] == "isometric") {
             var api = `https://minotar.net/cube/${args[0]}/100.png`
 
-            const avatar = new Discord.MessageEmbed()
+            const avatar = new Discord.EmbedBuilder()
                 .setTitle(`${argsCaps}'s isometric head`)
                 .setImage(`${api}`)
                 .setFooter(`Management`)
@@ -47,7 +47,7 @@ module.exports = {
         if (args[1] == "bust") {
             var api = `https://minotar.net/bust/${args[0]}/100.png`
 
-            const avatar = new Discord.MessageEmbed()
+            const avatar = new Discord.EmbedBuilder()
                 .setTitle(`${argsCaps}'s bust skin`)
                 .setImage(`${api}`)
                 .setFooter(`Management`)

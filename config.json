@@ -1,6 +1,8 @@
 {
-    "owners": [""],
-    "mongoPass": "",
+    "owners": [
+        "709463689874505728"
+    ],
+    "mongoPass": "mongodb+srv://Fred:MichaelCole2005@management.zihfpd0.mongodb.net/?appName=Management",
     "prefix": "",
     "YOUTUBE_API_KEY": ""
 }

@@ -7,17 +7,17 @@ module.exports = {
     run: (client, message, args) => {
         message.delete()
         message.channel.send(`https://discord.com/guidelines`)
-        const messageEmbed = new discord.MessageEmbed()
+        const messageEmbed = new discord.EmbedBuilder()
             .setColor('#7289d9')
             .setTitle('Discord Community Guidelines')
-            .setAuthor('Last Updated: May 19th, 2020.')
+            .setAuthor({ name: 'Last Updated: May 19th, 2020.' })
             .setDescription(`We created Discord to help people come together around games. It's been amazing to watch it grow into what it is today - a place where millions of diverse communities exist and people connect with old friends and new. We can't wait to see what's next.
 
 Our community guidelines are meant to explain what is and isn’t allowed on Discord, and ensure that everyone has a good experience. If you come across a message that appears to break these rules, please report it to us. We may take a number of steps, including issuing a warning, removing the content, or removing the accounts and/or servers responsible.
 
 The overwhelming majority of people use Discord responsibly, so these guidelines may seem obvious. Still, we want to be clear about the expectations for our users. Every user of Discord should feel like their voice can be heard, but not at the expense of someone else.`)
             .setThumbnail('https://cdn4.iconfinder.com/data/icons/logos-and-brands/512/91_Discord_logo_logos-512.png')
-        const anothermessageEmbed = new discord.MessageEmbed()
+        const anothermessageEmbed = new discord.EmbedBuilder()
             .setColor('#7289d9')
             .setTitle('Here are some rules for interacting with others:')
             .setDescription(`1. Do not organize, participate in, or encourage harassment of others. Disagreements happen and are normal, but continuous, repetitive, or severe negative comments may cross the line into harassment and are not okay.
@@ -30,7 +30,7 @@ The overwhelming majority of people use Discord responsibly, so these guidelines
   
   5. Do not send others viruses or malware, attempt to phish others, or hack or DDoS them.`)
 
-        const anotheranothermessageEmbed = new discord.MessageEmbed()
+        const anotheranothermessageEmbed = new discord.EmbedBuilder()
             .setColor('#7289d9')
             .setTitle(`Here are some rules for content on Discord:`)
             .setDescription(`6. You must apply the NSFW label to channels if there is adult content in that channel. Any content that cannot be placed in an age-gated channel, such as avatars, server banners, and invite splashes, may not contain adult content.
@@ -51,7 +51,7 @@ The overwhelming majority of people use Discord responsibly, so these guidelines
 
 14. In general, you should not promote, encourage or engage in any illegal behavior. This is very likely to get you kicked off Discord, and may get you reported to law enforcement.`)
 
-        const anotheranotheranothermessageEmbed = new discord.MessageEmbed()
+        const anotheranotheranothermessageEmbed = new discord.EmbedBuilder()
             .setColor('#7289d9')
             .setTitle(`Finally, we ask that you respect Discord itself:`)
             .setDescription(`15. You may not sell your account or your server.
@@ -62,13 +62,13 @@ The overwhelming majority of people use Discord responsibly, so these guidelines
 
 18. You may not spam Discord, especially our Customer Support and Trust & Safety teams. Making false and malicious reports, sending multiple reports about the same issue, or asking a group of users to all report the same content may lead to action being taken on your account.`)
 
-        const finalmessageEmbed = new discord.MessageEmbed()
+        const finalmessageEmbed = new discord.EmbedBuilder()
             .setDescription(`If you see any activity that violates these guidelines, you can report it to us by filling out [this form.](https://dis.gd/request)`)
 
-        message.channel.send(messageEmbed);
-        message.channel.send(anothermessageEmbed);
-        message.channel.send(anotheranothermessageEmbed);
-        message.channel.send(anotheranotheranothermessageEmbed);
-        message.channel.send(finalmessageEmbed);
+        message.channel.send({ embeds: [messageEmbed] });
+        message.channel.send({ embeds: [anothermessageEmbed] });
+        message.channel.send({ embeds: [anotheranothermessageEmbed] });
+        message.channel.send({ embeds: [anotheranotheranothermessageEmbed] });
+        message.channel.send({ embeds: [finalmessageEmbed] });
     }
 }

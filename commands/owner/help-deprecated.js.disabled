@@ -1,0 +1,154 @@
+const pagination = require('discord.js-pagination');
+const Discord = require('discord.js');
+const { mode } = require('mathjs');
+
+module.exports = {
+    name: "help-deprecated",
+    description: "The help command, what do you expect?",
+    async run(client, message, args) {
+        const moderation = new Discord.EmbedBuilder()
+            .setTitle('Moderation commands')
+            .addFields({ name: '`kick <@user>`', value: 'Kicks a member from your server via mention or ID', inline: true })
+            .addFields({ name: '`ban <@user>`', value: 'Bans a member from your server via mention or ID', inline: true })
+            .addFields({ name: '`clear <number>`', value: 'Purges a certain number of messages', inline: true })
+            .addFields({ name: '`channelinfo <#channel>`', value: 'Sends an embed with the specified channel information', inline: true })
+            .addFields({ name: '`createchannel <category> <name>`', value: 'Lets you create a channel', inline: true })
+            .addFields({ name: '`infinite-mute <@user>`', value: 'Let\'s you mute someone infinitely', inline: true })
+            .addFields({ name: '`mute <@user> <time>`', value: 'Let\'s you mute someone for a certain amount of time', inline: true })
+            .addFields({ name: '`unmute <@user>`', value: 'Let\'s you unmute a person that is muted', inline: true })
+            .addFields({ name: '`report <@user>`', value: 'Allows you to report someone as long as there is a channel called `reports`', inline: true })
+            .addFields({ name: '`warn <@user>`', value: 'Allows you to warn a user if they are misbehaving', inline: true })
+            .addFields({ name: '`warnings [@user]`', value: 'Let\'s you check how many warnings a user has', inline: true })
+            .addFields({ name: '`reset-warns [@user]`', value: 'Allows you to reset someone\'s warnings', inline: true })
+            .addFields({ name: '`setwelcome <#channel>`', value: 'Sets a welcome channel and will send welcome messages', inline: true })
+            .addFields({ name: '`setleave`', value: 'Sets the leave channel and will send goodbye messages', inline: true })
+            .addFields({ name: '`slowmode <#channel> <time>`', value: 'Sets a specified time as slowmode in the specified channel', inline: true })
+            .addFields({ name: '`unban <id>`', value: 'Unbans a user from the server if they are banned', inline: true })
+            .setDescription('<> stands for required, [] stands for choice')
+            .setTimestamp()
+        const fun = new Discord.EmbedBuilder()
+            .setTitle('Fun commands page 1')
+            .addFields({ name: '`8ball <question>`', value: 'Lets you use an 8ball to see into your future', inline: true })
+            .addFields({ name: '`anime <anime name>`', value: 'Looks up the specified anime show', inline: true })
+            .addFields({ name: '`ascii <text>`', value: 'Converts text into ascii', inline: true })
+            .addFields({ name: '`avatar [user]`', value: 'Allows you to look at your or someone else\'s profile picture', inline: true })
+            .addFields({ name: '`botinfo`', value: 'Gives you information about `Management`', inline: true })
+            .addFields({ name: '`dog`', value: 'Sends a cute image of a dog', inline: true })
+            .addFields({ name: '`corona [country]`', value: 'Lets you see the # of infected, dead, etc from covid-19 of a country or of the world', inline: true })
+            .addFields({ name: '`giveaway <channel> <winners> <time> <prize>`', value: 'Lets you start a giveaway if you have the required permissions', inline: true })
+            .addFields({ name: '`reroll <message id of the giveaway>`', value: 'Rerolls the giveaway that was made', inline: true })
+            .addFields({ name: '`google <search term>`', value: 'Lets you google something', inline: true })
+            .addFields({ name: '`help`', value: 'Lets you see all available commands :)', inline: true })
+            .addFields({ name: '`hug [@user]`', value: 'Lets you hug someone or lets you ask for a hug', inline: true })
+            .addFields({ name: '`imdb <movie>`', value: 'Lets you look up a movie on imdb', inline: true })
+            .addFields({ name: '`info`', value: 'Lets you see how many servers `Management` is in!', inline: true })
+            .addFields({ name: '`instagram`', value: 'Lets you look at someone\'s instagram page stats', inline: true })
+            .addFields({ name: '`invite`', value: 'Gives you a link to invite `Management` to your server', inline: true })
+            .addFields({ name: '`kiss`', value: 'Lets you kiss someone ;)', inline: true })
+            .addFields({ name: '`level`', value: 'Lets you check your level', inline: true })
+            .setDescription('<> stands for required, [] stands for choice', true)
+            .setTimestamp()
+        const fun2 = new Discord.EmbedBuilder()
+            .setTitle('Fun commands page 2')
+            .addFields({ name: '`math <math operation>`', value: 'Does your math homework' })
+            .addFields({ name: '`meme`', value: 'Sends a meme from a subreddit' })
+            .addFields({ name: '`meow`', value: 'Sends a cute image of a cat' })
+            .addFields({ name: '`minecraft <minecraft username>`', value: 'Sends a users minecraft skin' })
+            .addFields({ name: '`pat [@user]`', value: 'Pat someone or ask to be patted' })
+            .addFields({ name: '`poke [@user]`', value: 'Poke someone or ask to be poked' })
+            .addFields({ name: '`pokemon <pokemom name>`', value: 'Sends information about the specified pokemon' })
+            .addFields({ name: '`poll <#channel> <question>`', value: 'Starts a poll in the specified channel if the user has administrative permissions' })
+            .addFields({ name: '`putin`', value: 'You will have to find out for yourself' })
+            .addFields({ name: '`scrap <anime name>`', value: 'Gets any available links to watch the specified anime' })
+            .addFields({ name: '`send <@user>`', value: 'Sends a user a specified message, but only works with Administrative permissions', inline: true })
+            .addFields({ name: '`setnick [@user]`', value: 'Allows you to change your nickname or someone else\'s nickname if you have permission to do so', inline: true })
+            .addFields({ name: '`snipe`', value: 'Snipes a recently deleted message' })
+            .addFields({ name: '`spotify <@user>`', value: 'Sends the stats of a song that a user is listening to on Spotify' })
+            .addFields({ name: '`suggest <suggestion>`', value: 'Checks if there is a suggestions channel and sends your suggestion into the channel. (Must be called `suggestions`)' })
+            .addFields({ name: '`support`', value: 'Sends a link to the bots support server' })
+            .addFields({ name: '`ticket`', value: 'Opens a new ticket and creates a channel for the staff team' })
+            .addFields({ name: '`trivia`', value: 'Lets you play a game of trivia (beta)' })
+            .addFields({ name: '`uptime`', value: 'Checks the bot\'s uptime' })
+            .addFields({ name: '`userinfo`', value: 'Lets you see your or someone else\'s information (name, creation date, roles, etc)' })
+            .addFields({ name: '`weather <city>`', value: 'Checks weather forecast for provided location' })
+            .setTimestamp()
+        const economy = new Discord.EmbedBuilder()
+            .setTitle('Economy commands')
+            .addFields({ name: '`balance`', value: 'Checks your balance' })
+            .addFields({ name: '`daily`', value: 'Allows you to claim your daily $' })
+            .addFields({ name: '`gamble`', value: 'Allows you to pursue an addictive gambling addiction' })
+            .addFields({ name: '`leaderboard`', value: 'Lets you see who the richest people are' })
+            .addFields({ name: '`give`', value: 'Allows you to give someone money' })
+            .addFields({ name: '`payall`', value: 'Lets you give money to everyone in the server' })
+            .setDescription('<> stands for required, [] stands for choice')
+            .setTimestamp()
+        const owner = new Discord.EmbedBuilder()
+            .setTitle('Owner commands for FredTheBread#6932')
+            .addFields({ name: '`blacklist <@user>`', value: 'Blacklists a user from using the bot' })
+            .addFields({ name: '`eval <something>`', value: 'Evaluates a line of code' })
+            .addFields({ name: '`leave`', value: 'Makes the bot leave the server' })
+            .addFields({ name: '`status <something>`', value: 'Changes the bot\'s status' })
+            .addFields({ name: '`unblacklist <@user>`', value: 'Unblacklists a user from the bot' })
+            .setTimestamp()
+        const pages = [
+            fun,
+            fun2,
+            moderation,
+            economy,
+            owner
+        ]
+        const page1 = [
+            fun,
+            fun2,
+            moderation,
+            economy,
+            owner
+        ]
+        const page2 = [
+            fun2,
+            moderation,
+            economy,
+            owner,
+            fun
+        ]
+        const page3 = [
+            moderation,
+            economy,
+            owner,
+            fun,
+            fun2
+        ]
+        const page4 = [
+            economy,
+            owner,
+            fun,
+            fun2,
+            moderation
+        ]
+        const page5 = [
+            owner,
+            fun,
+            fun2,
+            moderation,
+            economy
+        ]
+
+        const emojiList = ["⏪", "⏩"];
+
+        const timeout = '120000';
+        if (!args[0]) {
+            pagination(message, pages, emojiList, timeout)
+        } else if (args[0] == 1) {
+            pagination(message, page1, emojiList, timeout)
+        } else if (args[0] == 2) {
+            pagination(message, page2, emojiList, timeout)
+        } else if (args[0] == 3) {
+            pagination(message, page3, emojiList, timeout)
+        } else if (args[0] == 4) {
+            pagination(message, page4, emojiList, timeout)
+        } else if (args[0] == 5) {
+            pagination(message, page5, emojiList, timeout)
+        }
+
+    }
+}

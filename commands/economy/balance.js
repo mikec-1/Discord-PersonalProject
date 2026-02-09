@@ -38,15 +38,15 @@ module.exports = {
                     daily: 0,
                 })
                 newData.save().catch(err => console.log(err));
-                let wembed = new Discord.MessageEmbed()
+                let wembed = new Discord.EmbedBuilder()
                     .setTitle(`${user.username}'s balance`)
                     .setDescription(`Balance: $0`)
-                return message.channel.send(wembed)
+                return message.channel.send({ embeds: [wembed] })
             } else {
-                let embed = new Discord.MessageEmbed()
+                let embed = new Discord.EmbedBuilder()
                     .setTitle(`${user.username}'s balance`)
                     .setDescription(`Balance: $${data.money}`)
-                return message.channel.send(embed)
+                return message.channel.send({ embeds: [embed] })
             }
         })
     }

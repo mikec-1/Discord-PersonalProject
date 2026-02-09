@@ -1,5 +1,5 @@
 const {
-    MessageEmbed
+    EmbedBuilder
 } = require('discord.js')
 
 module.exports = {
@@ -8,7 +8,7 @@ module.exports = {
     description: "Deletes the given amount of messages",
     run: async (client, message, args) => {
 
-        if (!message.guild.me.hasPermission("MANAGE_MESSAGES")) return message.channel.send("I don't have the permission to execute this command!");
+        if (!message.guild.members.me.hasPermission("MANAGE_MESSAGES")) return message.channel.send("I don't have the permission to execute this command!");
 
         if (!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send("You need the `MANAGE MESSAGES` permission to execute this command.");
 

@@ -8,7 +8,7 @@ module.exports = {
     description: ["Lets you add a role to a user"],
     run: async (client, message, args) => {
         if (!message.member.hasPermission("MANAGE_ROLES")) return message.channel.send('You don\'t have permission to remove roles.')
-        if (!message.guild.me.hasPermission("MANAGE_ROLES")) return message.channel.send(`**${message.author.username}**, I do not have permission to remove roles!`)
+        if (!message.guild.members.me.hasPermission("MANAGE_ROLES")) return message.channel.send(`**${message.author.username}**, I do not have permission to remove roles!`)
 
         const target = message.mentions.members.first()
 

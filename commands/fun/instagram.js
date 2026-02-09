@@ -1,4 +1,4 @@
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const { stripIndents } = require("common-tags");
 
 const fetch = require("node-fetch");
@@ -29,19 +29,19 @@ module.exports = {
 
         const account = res.graphql.user;
         
-        const embed = new MessageEmbed()
-            .setColor("RANDOM")
+        const embed = new EmbedBuilder()
+            .setColor(Math.floor(Math.random() * 16777215))
             .setTitle(account.full_name)
             .setURL(`https://instagram.com/${name}`)
             .setThumbnail(account.profile_pic_url_hd)
-            .addField("Profile information", stripIndents`**- Username:** ${account.username}
+            .addFields({ name: "Profile information", value:  stripIndents`**- Username:** ${account.username}
             **- Full name:** ${account.full_name}
             **- Biography:** ${account.biography.length == 0 ? "none" : account.biography}
             **- Posts:** ${account.edge_owner_to_timeline_media.count}
             **- Followers:** ${account.edge_followed_by.count}
             **- Following:** ${account.edge_follow.count}
-            **- Private account:** ${account.is_private ? "Yes 🔐" : "Nope 🔓"}`);
+            **- Private account:** ${account.is_private ? "Yes 🔐" : "Nope 🔓"}` });
 
-        message.channel.send(embed);
+        message.channel.send({ embeds: [embed] });
     }
 }

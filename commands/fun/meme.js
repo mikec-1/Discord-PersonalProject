@@ -1,6 +1,6 @@
 const got = require('got')
 const {
-  MessageEmbed
+  EmbedBuilder
 } = require('discord.js')
 
 module.exports = {
@@ -11,10 +11,10 @@ module.exports = {
     got('https://www.reddit.com/r/memes/random/.json').then(res => {
       let content = JSON.parse(res.body)
       message.channel.send(
-        new MessageEmbed()
+        new EmbedBuilder()
         .setTitle(content[0].data.children[0].data.title)
         .setImage(content[0].data.children[0].data.url)
-        .setColor("RANDOM")
+        .setColor(Math.floor(Math.random() * 16777215))
         .setFooter(`👍 ${content[0].data.children[0].data.ups} | Comments : ${content[0].data.children[0].data.num_comments}`)
       )
     })

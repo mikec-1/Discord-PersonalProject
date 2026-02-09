@@ -19,23 +19,23 @@ module.exports = {
                 'name': args.join(" ")
             })
 
-            let embed = new discord.MessageEmbed()
+            let embed = new discord.EmbedBuilder()
                 .setTitle(movie.title)
                 .setColor("#ff2050")
                 .setThumbnail(movie.poster)
                 .setDescription(movie.plot)
-                .setFooter(`Ratings: ${movie.rating}`)
-                .addField("Country", movie.country, true)
-                .addField("Languages", movie.languages, true)
-                .addField("Type", movie.type, true);
+                .setFooter({ text: `Ratings: ${movie.rating}` })
+                .addFields({ name: "Country", value: movie.country, inline: true })
+                .addFields({ name: "Languages", value: movie.languages, inline: true })
+                .addFields({ name: "Type", value: movie.type, inline: true });
 
 
-            message.channel.send(embed).catch(console.error)
-        } catch(err) {
+            message.channel.send({ embeds: [embed] }).catch(console.error)
+        } catch (err) {
             message.channel.send('I couldn\'t find that movie! Please try again!')
         }
 
-    
+
 
     }
 }

@@ -1,5 +1,5 @@
 const {
-    MessageEmbed
+    EmbedBuilder
 } = require('discord.js');
 
 module.exports = {
@@ -11,7 +11,7 @@ module.exports = {
             return message.channel.send("You do not have permission to unmute anyone!");
         }
 
-        if (!message.guild.me.hasPermission("MANAGE_ROLES")) {
+        if (!message.guild.members.me.hasPermission("MANAGE_ROLES")) {
             return message.channel.send("I do not have permission to manage roles.");
         }
 

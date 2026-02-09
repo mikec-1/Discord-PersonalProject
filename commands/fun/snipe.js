@@ -6,11 +6,11 @@ module.exports = {
     run: async (client, message, args) => {
         const msg = client.snipes.get(message.channel.id)
         if (!msg) return message.channel.send("There is nothing to snipe!")
-        const embed = new Discord.MessageEmbed()
-            .setAuthor(msg.author)
+        const embed = new Discord.EmbedBuilder()
+            .setAuthor({ name: msg.author, iconURL: msg.profilephoto })
             .setDescription(msg.content)
-            .setTimestamp()
+            .setTimestamp(msg.date)
         if (msg.image) embed.setImage(msg.image)
-        message.channel.send(embed)
+        message.channel.send({ embeds: [embed] })
     }
 }

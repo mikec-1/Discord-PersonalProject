@@ -99,11 +99,11 @@ module.exports = {
               'D - ' + atob(this.question.results[0].correct_answer)
             ]
           }
-          this.question_embed = new discord.MessageEmbed()
+          this.question_embed = new discord.EmbedBuilder()
             .setColor('#0099ff')
             .setTitle(atob(this.question.results[0].question))
             .setDescription(this.answer_array)
-            .setFooter('Category - ' + atob(this.question.results[0].category) + ', Difficulty - ' + atob(this.question.results[0].difficulty))
+            .setFooter({ text: 'Category - ' + atob(this.question.results[0].category) + ', Difficulty - ' + atob(this.question.results[0].difficulty) })
         }
         if (atob(this.question.results[0].type) == 'boolean') {
           this.question_length = 1
@@ -116,11 +116,11 @@ module.exports = {
             'A - ' + 'True',
             'B - ' + 'False'
           ]
-          this.question_embed = new discord.MessageEmbed()
+          this.question_embed = new discord.EmbedBuilder()
             .setColor('#0099ff')
             .setTitle(atob(this.question.results[0].question))
             .setDescription(this.answer_array)
-            .setFooter('Category - ' + atob(this.question.results[0].category) + ', Difficulty - ' + atob(this.question.results[0].difficulty))
+            .setFooter({ text: 'Category - ' + atob(this.question.results[0].category) + ', Difficulty - ' + atob(this.question.results[0].difficulty) })
         }
         this.question_message = await this.message.channel.send(this.question_embed)
         let step = -1
@@ -142,21 +142,21 @@ module.exports = {
           if (this.reaction == '🇩') this.input_answer = 4
           if (this.input_answer == this.correct_answer) {
             this.answer_array[this.input_answer - 1] = this.answer_array[this.input_answer - 1] + ' ✅'
-            this.question_embed = new discord.MessageEmbed()
+            this.question_embed = new discord.EmbedBuilder()
               .setColor('#0099ff')
               .setTitle(atob(this.question.results[0].question))
               .setDescription(this.answer_array)
-              .setFooter('Category - ' + atob(this.question.results[0].category) + ', Difficulty - ' + atob(this.question.results[0].difficulty))
+              .setFooter({ text: 'Category - ' + atob(this.question.results[0].category) + ', Difficulty - ' + atob(this.question.results[0].difficulty) })
             this.question_message.edit(this.question_embed)
             this.question_message.edit('You got it correct! :smile:')
             this.end_game()
           } else {
             this.answer_array[this.input_answer - 1] = this.answer_array[this.input_answer - 1] + ' ❌'
-            this.question_embed = new discord.MessageEmbed()
+            this.question_embed = new discord.EmbedBuilder()
               .setColor('#0099ff')
               .setTitle(atob(this.question.results[0].question))
               .setDescription(this.answer_array)
-              .setFooter('Category - ' + atob(this.question.results[0].category) + ', Difficulty - ' + atob(this.question.results[0].difficulty))
+              .setFooter({ text: 'Category - ' + atob(this.question.results[0].category) + ', Difficulty - ' + atob(this.question.results[0].difficulty) })
             this.question_message.edit(this.question_embed)
             this.question_message.edit('You got it wrong. The correct answer was ' + this.reactions[this.correct_answer - 1])
             this.end_game()

@@ -15,11 +15,11 @@ module.exports = {
         body
       }) return message.channel.send("I broke! Try again.")
 
-    let dEmbed = new Discord.MessageEmbed()
+    let dEmbed = new Discord.EmbedBuilder()
       .setTitle(`Random Pug Image`)
       .setColor(`#f3f3f3`)
       .setImage(body.message)
 
-    message.channel.send(dEmbed)
+    message.channel.send({ embeds: [dEmbed] })
   }
 }

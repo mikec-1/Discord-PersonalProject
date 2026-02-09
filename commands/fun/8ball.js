@@ -1,5 +1,5 @@
 const {
-    MessageEmbed
+    EmbedBuilder
 } = require("discord.js");
 module.exports = {
     name: "8ball",
@@ -20,11 +20,11 @@ module.exports = {
             ];
             let response =
                 responses[Math.floor(Math.random() * responses.length)];
-            let Embed = new MessageEmbed()
+            let Embed = new EmbedBuilder()
                 .setTitle(`8Ball!`)
                 .setDescription(`Your question: ${question}\nMy reply: ${response}`)
-                .setColor(`RANDOM`);
-            message.channel.send(Embed);
+                .setColor(Math.floor(Math.random() * 16777215));
+            message.channel.send({ embeds: [Embed] });
         }
     }
 };

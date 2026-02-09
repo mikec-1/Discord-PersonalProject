@@ -1,5 +1,4 @@
 const Discord = require("discord.js");
-const client = new Discord.Client()
 
 module.exports = {
     name: "botinfo",
@@ -7,14 +6,14 @@ module.exports = {
     description: "Returns bot info",
     run: async (client, message, args) => {
         let boticon = client.user.displayAvatarURL();
-        let botembed = new Discord.MessageEmbed()
-        .setDescription("Bot Information")
-        .setColor("0ED4DA")
-        .setThumbnail(boticon)
-        .addField("Bot Name", client.user.username)
-        .addField("Bot Creation Date", client.user.createdAt)
-        .addField("Servers", client.guilds.cache.size, true)
-        .addField("Members", client.users.cache.size, true)
-        message.channel.send(botembed)
+        let botembed = new Discord.EmbedBuilder()
+            .setDescription("Bot Information")
+            .setColor("0ED4DA")
+            .setThumbnail(boticon)
+            .addFields({ name: "Bot Name", value: client.user.username })
+            .addFields({ name: "Bot Creation Date", value: client.user.createdAt })
+            .addFields({ name: "Servers", value: client.guilds.cache.size, inline: true })
+            .addFields({ name: "Members", value: client.users.cache.size, inline: true })
+        message.channel.send({ embeds: [botembed] })
     }
 }

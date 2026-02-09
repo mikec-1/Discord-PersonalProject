@@ -1,9 +1,9 @@
 const db = require('quick.db')
 const {
-    MessageEmbed
+    EmbedBuilder
 } = require("discord.js")
-let embed = new MessageEmbed()
-    .setColor("RANDOM")
+let embed = new EmbedBuilder()
+    .setColor(Math.floor(Math.random() * 16777215))
 module.exports = {
     name: "warnings",
     description: "Check how many warnings you or someone else has",
@@ -14,8 +14,8 @@ module.exports = {
 
         let warnings = db.get(`warnings_${message.guild.id}_${user.id}`)
         if (warnings === null) warnings = 0;
-        embed.setAuthor(`Number of Warnings`)
+        embed.setAuthor({ name: `Number of Warnings` })
         embed.setDescription(`${user} has **${warnings} warnings**!`)
-        message.channel.send(embed)
+        message.channel.send({ embeds: [embed] })
     }
 }

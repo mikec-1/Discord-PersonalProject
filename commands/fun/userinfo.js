@@ -16,23 +16,25 @@ module.exports = {
             .map(r => r)
             .join(" ");
 
-        userinfo.avatar = user.displayAvatarURL()
+        const member = message.guild.members.cache.get(user.id);
+
+        userinfo.avatar = user.displayAvatarURL();
         userinfo.name = user.username;
         userinfo.discrim = `#${user.discriminator}`;
-        userinfo.id = user.id
-        userinfo.status = user.presence.status;
-        userinfo.registered = moment.utc(message.guild.members.cache.get(user.id).user.createdAt).format("dddd, MMMM do, YYYY");
-        userinfo.joined = moment.utc(message.guild.members.cache.get.joinedAt).format("dddd, MMMM do, YYYY");
-            const embed = new Discord.MessageEmbed()
-            .setAuthor(user.tag, userinfo.avatar)
+        userinfo.id = user.id;
+        userinfo.status = member?.presence?.status || "offline";
+        userinfo.registered = moment.utc(user.createdAt).format("dddd, MMMM do, YYYY");
+        userinfo.joined = member ? moment.utc(member.joinedAt).format("dddd, MMMM do, YYYY") : "Unknown";
+        const embed = new Discord.EmbedBuilder()
+            .setAuthor({ name: user.tag, iconURL: userinfo.avatar })
             .setThumbnail(userinfo.avatar)
-            .addField('Username: ', userinfo.name, true)
-            .addField('Discriminator: ', userinfo.discrim, true)
-            .addField('ID: ', userinfo.id, true)
-            .addField('Status: ', userinfo.status, true)
-            .addField("Registered: ", userinfo.registered, true)
-            .addField('Joined: ', userinfo.joined, true)
-            .addField('Roles: ', rolemap, true)
-        message.channel.send(embed)
+            .addFields({ name: 'Username: ', value: userinfo.name, inline: true })
+            .addFields({ name: 'Discriminator: ', value: userinfo.discrim, inline: true })
+            .addFields({ name: 'ID: ', value: userinfo.id, inline: true })
+            .addFields({ name: 'Status: ', value: userinfo.status, inline: true })
+            .addFields({ name: "Registered: ", value: userinfo.registered, inline: true })
+            .addFields({ name: 'Joined: ', value: userinfo.joined, inline: true })
+            .addFields({ name: 'Roles: ', value: rolemap, inline: true })
+        message.channel.send({ embeds: [embed] })
     }
 }

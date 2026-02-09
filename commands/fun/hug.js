@@ -13,7 +13,7 @@ module.exports = {
         ];
         let pick = gifs[Math.floor(Math.random() * gifs.length)];
     
-        let embed = new Discord.MessageEmbed();
+        let embed = new Discord.EmbedBuilder();
         embed.setColor(`PURPLE`);
         embed.setImage(pick);
     
@@ -24,6 +24,6 @@ module.exports = {
             embed.setTitle(`${message.author.username} wants a hug.`);
         }
     
-        return message.channel.send(embed);
+        return message.channel.send({ embeds: [embed] });
     }
 }

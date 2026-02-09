@@ -1,4 +1,4 @@
-const { MessageEmbed } = require('discord.js');
+const { EmbedBuilder } = require('discord.js');
 const axios = require('axios');
 
 module.exports = {
@@ -16,11 +16,11 @@ module.exports = {
             return message.channel.send(`The Api is currently down, please try again later!`)
         }
         message.channel.send("Decoding...").then(async msg => {
-        const embed = new MessageEmbed()
+        const embed = new EmbedBuilder()
             .setTitle('Binary to text')
             .setDescription(data.text)
         msg.delete()
-        await message.channel.send(embed)
+        await message.channel.send({ embeds: [embed] })
         })
     }
 }

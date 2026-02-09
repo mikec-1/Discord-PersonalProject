@@ -5,45 +5,57 @@ module.exports = {
     category: "info",
     description: "Changes the nickname of the person mentioned",
     run: async (client, message, args) => {
-        // You can make a single array to detect the user permissions.
-        if (!message.member.hasPermission(["MANAGE_GUILD", "ADMINISTRATOR"])) {
-            return message.channel.send({
-                embed: {
-                    color: "RED",
-                    description: "You can't use this command!"
-                }
-            })
+        const { EmbedBuilder, PermissionFlagsBits } = require("discord.js");
+
+        if (!message.member.permissions.has([PermissionFlagsBits.ManageGuild, PermissionFlagsBits.Administrator])) {
+            const embed = new EmbedBuilder()
+                .setColor(0xFF0000)
+                .setDescription("You can't use this command!");
+            return message.channel.send({ embeds: [embed] });
         }
 
-        let user = message.mentions.users.first(); // You can mention someone, not only just user.
-        if (!user) return message.channel.send({
-            embed: {
-                color: "RED",
-                description: "You need to mention the user!"
-            }
-        });
+        let member = message.mentions.members.first();
+        if (!member) {
+            const embed = new EmbedBuilder()
+                .setColor(0xFF0000)
+                .setDescription("You need to mention the user!");
+            return message.channel.send({ embeds: [embed] });
+        }
 
         let nick = args.slice(1).join(" ");
-        if (!nick) return message.channel.send({
-            embed: {
-                color: "RED",
-                description: "You need to input the nickname!"
-            }
-        });
+        if (!nick) {
+            const embed = new EmbedBuilder()
+                .setColor(0xFF0000)
+                .setDescription("You need to input the nickname!");
+            return message.channel.send({ embeds: [embed] });
+        }
 
-        let member = message.guild.members.cache.get(user.id);
+        if (nick.toLowerCase() === "reset") {
+            try {
+                await member.setNickname(null);
+                const embed = new EmbedBuilder()
+                    .setColor(0x00FF00)
+                    .setDescription(`Successfully reset **${member.user.tag}**'s nickname!`);
+                return message.channel.send({ embeds: [embed] });
+            } catch (err) {
+                const embed = new EmbedBuilder()
+                    .setColor(0xFF0000)
+                    .setDescription(`Error: ${err.message}`);
+                return message.channel.send({ embeds: [embed] });
+            }
+        }
 
-        await member.setNickname(nick).catch(err => message.channel.send({
-            embed: {
-                color: "RED",
-                description: `Error: ${err}`
-            }
-        }));
-        return message.channel.send({
-            embed: {
-                color: "GREEN",
-                description: `Successfully changed **${user.tag}** nickname to **${nick}**`
-            }
-        });
+        try {
+            await member.setNickname(nick);
+            const embed = new EmbedBuilder()
+                .setColor(0x00FF00)
+                .setDescription(`Successfully changed **${member.user.tag}** nickname to **${nick}**`);
+            return message.channel.send({ embeds: [embed] });
+        } catch (err) {
+            const embed = new EmbedBuilder()
+                .setColor(0xFF0000)
+                .setDescription(`Error: ${err.message}`);
+            return message.channel.send({ embeds: [embed] });
+        }
     }
 }

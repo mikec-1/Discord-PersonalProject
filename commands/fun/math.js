@@ -17,13 +17,13 @@ module.exports = {
             return message.channel.send('Please provide a **valid** question')
         }
 
-        const embed = new Discord.MessageEmbed()
+        const embed = new Discord.EmbedBuilder()
             .setColor(0x808080)
             .setTitle('Calculator')
-            .addField('Question', `\`\`\`css\n${args.join(' ')}\`\`\``)
-            .addField('Answer', `\`\`\`css\n${resp}\`\`\``)
+            .addFields({ name: 'Question', value: `\`\`\`css\n${args.join(' ')}\`\`\`` })
+            .addFields({ name: 'Answer', value: `\`\`\`css\n${resp}\`\`\`` })
 
-        message.channel.send(embed);
+        message.channel.send({ embeds: [embed] });
 
     }
 }

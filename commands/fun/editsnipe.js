@@ -10,14 +10,14 @@ module.exports = {
 
         if (!snip) return message.channel.send("No edits were found.")
 
-        let embed = new Discord.MessageEmbed()
-            .setColor("GREEN")
+        let embed = new Discord.EmbedBuilder()
+            .setColor(Discord.Colors.Green)
             .setTitle("Message Edited")
-            .setAuthor(snip.user, snip.profilephoto)
-            .setDescription(`**Message: **\`${snip.msg}\``)
+            .setAuthor({ name: snip.user, iconURL: snip.profilephoto })
+            .setDescription(`**Changes:**\n\`\`\`diff\n- ${snip.msg}\n+ ${snip.newMsg}\n\`\`\``)
             .setTimestamp(snip.date)
         if (snip.image) embed.setImage(snip.image)
 
-        message.channel.send(embed)
+        message.channel.send({ embeds: [embed] })
     }
 }

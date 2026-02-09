@@ -1,7 +1,7 @@
 const {
     Client,
     Message,
-    MessageEmbed
+    EmbedBuilder
 } = require('discord.js');
 
 module.exports = {
@@ -45,7 +45,7 @@ module.exports = {
         if (rolemap.length > 1024) rolemap = "To many roles to display";
         if (!rolemap) rolemap = "No roles";
 
-        const embed = new MessageEmbed()
+        const embed = new EmbedBuilder()
             .setTitle(`Server info for "${name}"`)
             .setThumbnail(icon)
             .addFields({
@@ -77,11 +77,13 @@ module.exports = {
                 value: rolemap,
                 inline: true,
             })
-            .setFooter(`Server name: ${guild.name} | Server ID: ${guild.id}`, guild.iconURL({
-                size: 4096
-            }))
+            .setFooter({
+                text: `Server name: ${guild.name} | Server ID: ${guild.id}`, iconURL: guild.iconURL({
+                    size: 4096
+                })
+            })
             .setColor('#7289da')
 
-        message.channel.send(embed)
+        message.channel.send({ embeds: [embed] })
     }
 }
