@@ -8,6 +8,16 @@ The bot can be added using the following link: https://discordapp.com/oauth2/aut
 Unfortunately does not work anymore as Discord has changed their Developer Portal with the original Bot being removed in late 2024.
 However, this Repository can be cloned and hosted on an another platform for free by other users.
 
+This project was in development for over 9 months and is available for anyone to use.
+
+Unfortunately due to a lack of funds to pay for a new domain name, no good free alternative to Heroku and a lack of time this bot is no longer active on Discord.
+
+Update 09/02/2026:
+Work on migrating this project from Discord.js v12 to v14 has started. I have already updated the core of the Application, meaning it runs and returns basic commands like ping and help.
+Updating all the commands is a work in progress and will likely take time.
+
+Peace.
+
 All commands can be found here:
 
 | Animals |   Economy   |     Fun      |  Moderation   |    Owner    |
@@ -74,9 +84,3 @@ All commands can be found here:
 |        |            | weather      |               |             |
 |        |            | webhook      |               |             |
 
-
-This project was in development for over 6 months and is available for anyone to use.
-
-Unfortunately due to a lack of funds to pay for a new domain name, no good free alternative to Heroku and a lack of time this bot is no longer active on Discord.
-
-Peace.
